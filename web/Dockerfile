@@ -5,7 +5,7 @@ FROM python:3.8.3-slim-buster
 WORKDIR /usr/src/app
 
 # Copy web appliction files
-COPY . /usr/src/app/
+ADD ./web $WORKDIR
 
 # Install dependencies
 RUN pip install --upgrade pip
