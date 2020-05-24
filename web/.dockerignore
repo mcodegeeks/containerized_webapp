@@ -1,0 +1,8 @@
+.git
+.gitignore
+.env.db
+.dockerignore
+sftp-config.json
+Dockerfile
+__pycache__/
+venv/

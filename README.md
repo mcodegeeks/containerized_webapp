@@ -1,3 +1,2 @@
 # Description
-It's a practice to dockerize a web application.
-
+Practice of dockerizing a web application.
