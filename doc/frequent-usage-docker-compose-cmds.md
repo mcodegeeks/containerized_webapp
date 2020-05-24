@@ -17,8 +17,11 @@ $ docker-compose up -d                  # Builds, (re)creates, starts, and attac
 $ docker-compose up --build
 $ docker-compose up --no-build
 $ docker-compose up --no-start
-
+$ docker-compose -f docker-compose.prod.yml up -d
+```
+```
 $ docker-compose down                   # Stops containers and removes containers, networks, volumes, and images created by `up`.
 $ docker-compose down --rmi all
 $ docker-compose down --rmi local
+$ docker-compose -f docker-compose.prod.yml down --rmi all
 ```
