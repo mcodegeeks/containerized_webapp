@@ -9,7 +9,7 @@ ADD . $WORKDIR
 
 # Install dependencies
 RUN pip install --upgrade pip
-RUN pip install -r requirements
+RUN pip install -r requirements.txt
 
 # Run server
 CMD flask run -h 0.0.0.0
