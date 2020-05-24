@@ -5,11 +5,11 @@ FROM python:3.8.3-slim-buster
 WORKDIR /usr/src/app
 
 # Copy web appliction files
-ADD . $WORKDIR
+COPY . /usr/src/app/
 
 # Install dependencies
 RUN pip install --upgrade pip
-RUN pip install -r $WORKDIR/requirements
+RUN pip install -r requirements
 
 # Run server
 CMD flask run -h 0.0.0.0
