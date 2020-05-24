@@ -1,2 +1,3 @@
-# containerized_webapp
-A containerized Web Application with the Docker.
+# Description
+It's a practice to dockerize a web application.
+
