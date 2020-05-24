@@ -8,6 +8,12 @@ $ docker volume ls                  # List volumes
 $ docker network ls                 # List networks
 ```
 
+## Create
+```
+$ docker volume create              # Create a volume
+$ docker volume create --name=postgres_volume 
+```
+
 ### Remove
 ```
 $ docker rm -f                      # Remove one or more containers
