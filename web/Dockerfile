@@ -12,4 +12,4 @@ RUN pip install --upgrade pip
 RUN pip install -r requirements
 
 # Run server
-CMD flask run -h 0.0.0.0
+CMD gunicorn --bind :5000 wsgi:app
