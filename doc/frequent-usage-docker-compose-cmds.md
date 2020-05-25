@@ -25,3 +25,7 @@ $ docker-compose down --rmi all
 $ docker-compose down --rmi local
 $ docker-compose -f docker-compose.prod.yml down --rmi all
 ```
+```
+$ docker-compose stop                   # Stop running containers without removing them.
+$ docker-compose stop web
+```
