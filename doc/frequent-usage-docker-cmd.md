@@ -38,6 +38,7 @@ $ docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
 $ docker run                        # Run a command in a new container
 $ docker run -it --rm web:custom /bin/bash
 $ docker run --name web -p 5000:5000 -d --rm web:custom
+$ docker run --name web -p 5000:5000 -d --rm mcodegeeks/web:latest
 $ docker run --name postgres -p 54320:5432 --env-file ./.env.db -d --rm postgres:13-alpine
 $ docker run --name jenkins -p 8080:8080 -p 50000:50000 -v jenkins_volume:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock -u root -d jenkins/jenkins:custom
 ```
