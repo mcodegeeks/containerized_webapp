@@ -78,7 +78,7 @@ if __name__ == "__main__":
 ```
 (venv) $ flask db [OPTIONS] COMMAND [ARGS]  # Perform database migrations.
 (venv) $ flask db init                      # Creates a new migration repository.
-(venv) $ flask db migrate -m "users table"  # Autogenerate a new revision file (Alias for 'revision...
+(venv) $ flask db migrate -m "comment"      # Autogenerate a new revision file (Alias for 'revision...
 (venv) $ flask db upgrade                   # Upgrade to a later version
 (venv) $ flask db downgrade                 # Revert to a previous version
 ```
