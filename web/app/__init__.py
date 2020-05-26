@@ -26,22 +26,3 @@ def create_app(config_class=Config):
     app.register_blueprint(auth_bp)
 
     return app
-
-
-'''
-import click
-
-@app.cli.command('create')
-@click.argument('args')
-def create(args): 
-    """Create a database with initial data for 'database' argument."""
-    if (args == 'database'):
-        print("Creating database")
-        db.drop_all()
-        db.create_all()
-        db.session.commit()
-    else:
-        print("Usage: flask [OPTIONS] COMMAND [ARGS]...\n" \
-              "Try 'flask --help' for help.\n\n" \
-              "Error: No such argument '%s'." % args)
-'''    
