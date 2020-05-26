@@ -1,11 +1,23 @@
 from flask import render_template, redirect, url_for, flash
+from flask_login import current_user, login_user
 from app.auth import bp
 from app.auth.views import LoginForm, RegisterForm, ForgotPasswordForm, ResetPasswordForm
+from app.auth.models import User
 
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('main.index'))
     form = LoginForm()
     if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user is None:
+            flash('Your email does not exist.')
+            return redirect(url_for('auth.login'))
+        elif not user.verifyPassword(form.password.data):
+            flash('Your password is incorrect.')
+            return redirect(url_for('auth.login'))
+        login_user(user, remember=form.rememberMe.data)
         return redirect(url_for('main.index'))
     return render_template('login.html', title='Sign in', form=form)
 
