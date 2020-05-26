@@ -72,6 +72,7 @@ if __name__ == "__main__":
 (venv) $ pip install flask-sqlalchemy       # Adds SQLAlchemy support to your Flask application.
 (venv) $ pip install SQLAlchemy             # Database Abstraction Library
 (venv) $ pip install flask-migrate          # SQLAlchemy database migrations for Flask applications using Alembic
+(venv) $ pip install Werkzeug               # The comprehensive WSGI web application library.
 ```
 
 ### Database Migration
