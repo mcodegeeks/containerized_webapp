@@ -12,7 +12,11 @@
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="{{ url_for('auth.register') }}">Sign up</a></li>
+            {% if current_user.is_anonymous %}
+              <li><a href="{{ url_for('auth.login') }}">Sign in</a></li>
+            {% else %}
+              <li><a href="{{ url_for('auth.logout') }}">Sign out</a></li>
+            {% endif %}
         </ul>
       </div>
     </div>

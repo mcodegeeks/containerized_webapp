@@ -1,5 +1,5 @@
 from flask import render_template, redirect, url_for, flash
-from flask_login import current_user, login_user
+from flask_login import current_user, login_user, logout_user
 from app.auth import bp
 from app.auth.views import LoginForm, RegisterForm, ForgotPasswordForm, ResetPasswordForm
 from app.auth.models import User
@@ -21,6 +21,10 @@ def login():
         return redirect(url_for('main.index'))
     return render_template('login.html', title='Sign in', form=form)
 
+@bp.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('main.index'))
 
 @bp.route('/register', methods=['GET', 'POST'])
 def register():
