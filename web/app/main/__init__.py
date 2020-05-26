@@ -1,5 +1,5 @@
 from flask import Blueprint
 
-bp = Blueprint('main', __name__)
+bp = Blueprint('main', __name__, template_folder='views')
 
 from app.main import controllers
