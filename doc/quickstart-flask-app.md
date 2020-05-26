@@ -61,3 +61,24 @@ if __name__ == "__main__":
 ```
 {"hello":"world"}
 ```
+
+### Packages
+```
+(venv) $ pip install flask                  # A simple framework for building complex web applications.
+(venv) $ pip install python-dotenv          # Add .env support to your flask apps in development and deployments
+(venv) $ pip install Jinja2                 # A very fast and expressive template engine.
+(venv) $ pip install flask-wtf              # Simple integration of Flask and WTForms.
+(venv) $ pip install email-validator        # A robust email syntax and deliverability validation library for Python 2.x/3.x.
+(venv) $ pip install flask-sqlalchemy       # Adds SQLAlchemy support to your Flask application.
+(venv) $ pip install SQLAlchemy             # Database Abstraction Library
+(venv) $ pip install flask-migrate          # SQLAlchemy database migrations for Flask applications using Alembic
+```
+
+### Database Migration
+```
+(venv) $ flask db [OPTIONS] COMMAND [ARGS]  # Perform database migrations.
+(venv) $ flask db init                      # Creates a new migration repository.
+(venv) $ flask db migrate -m "users table"  # Autogenerate a new revision file (Alias for 'revision...
+(venv) $ flask db upgrade                   # Upgrade to a later version
+(venv) $ flask db downgrade                 # Revert to a previous version
+```
