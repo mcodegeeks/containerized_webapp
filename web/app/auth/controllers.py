@@ -15,7 +15,7 @@ def login():
         if user is None:
             flash('Your email does not exist.')
             return redirect(url_for('auth.login'))
-        elif not user.verifyPassword(form.password.data):
+        elif not user.validate_password(form.password.data):
             flash('Your password is incorrect.')
             return redirect(url_for('auth.login'))
         login_user(user, remember=form.rememberMe.data)
@@ -34,7 +34,7 @@ def register():
     form = RegisterForm()
     if form.validate_on_submit():
         user = User(email=form.email.data, username=form.username.data)
-        user.setPassword(form.password.data)
+        user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
         flash('You have been registered successfully. Try signing in with it here.')
@@ -42,8 +42,8 @@ def register():
     return render_template('register.html', title='Sign up', form=form)
 
 
-@bp.route('/forgotpassword', methods=['GET', 'POST'])
-def forgotPassword():
+@bp.route('/forgot_password', methods=['GET', 'POST'])
+def forgot_password():
     if current_user.is_authenticated:
         return redirect(url_for('main.index'))
     form = ForgotPasswordForm()
@@ -51,22 +51,22 @@ def forgotPassword():
         user = User.query.filter_by(email=form.email.data).first()
         if user is None:
             flash("We're sorry. We weren't able to identify you given the information provided.")
-            return redirect(url_for('auth.forgotPassword'))
-        token = user.getResetPasswordToken()
-        return redirect(url_for('auth.resetPassword', token=token))
+            return redirect(url_for('auth.forgot_password'))
+        token = user.get_reset_password_token()
+        return redirect(url_for('auth.reset_password', token=token))
     return render_template('forgot_password.html', title='Forgot password', form=form)
 
 
-@bp.route('/resetpassword/<token>', methods=['GET', 'POST'])
-def resetPassword(token):
+@bp.route('/reset_password/<token>', methods=['GET', 'POST'])
+def reset_password(token):
     if current_user.is_authenticated:
         return redirect(url_for('main.index'))
-    user = User.verifyResetPasswordToken(token)
+    user = User.validate_reset_password_token(token)
     if not user:
-        return redirect(url_for('auth.forgotPassword'))
+        return redirect(url_for('auth.forgot_password'))
     form = ResetPasswordForm()
     if form.validate_on_submit():
-        user.setPassword(form.password.data)
+        user.set_password(form.password.data)
         db.session.commit()
         flash('Your password has been changed successfully. Try signing in with it here.')
         return redirect(url_for('auth.login'))

@@ -18,6 +18,7 @@ def create_app(config_class=Config):
     migrate.init_app(app, db)
     bootstrap.init_app(app)
     login.init_app(app)
+    login.login_view = 'login'
 
     from app.main import bp as main_bp
     app.register_blueprint(main_bp)
