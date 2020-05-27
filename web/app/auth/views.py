@@ -33,3 +33,7 @@ class ResetPasswordForm(FlaskForm):
     password = PasswordField('New password', validators=[DataRequired()])
     password2 = PasswordField('Password again', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Save changes and sign in')
+
+    def validate_password(self, field):
+        if len(field.data) < 6:
+            raise ValidationError('Passwords must consist of at least 6 characters.')    

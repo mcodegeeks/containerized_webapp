@@ -44,18 +44,22 @@ def register():
 
 @bp.route('/forgotpassword', methods=['GET', 'POST'])
 def forgotPassword():
+    if current_user.is_authenticated:
+        return redirect(url_for('main.index'))
     form = ForgotPasswordForm()
     if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user is None:
+            flash("We're sorry. We weren't able to identify you given the information provided.")
+            return redirect(url_for('auth.forgotPassword'))
         return redirect(url_for('auth.resetPassword'))
-    '''
-    There was a problem
-    We're sorry. We weren't able to identify you given the information provided.
-    '''
     return render_template('forgot_password.html', title='Forgot password', form=form)
 
 
 @bp.route('/resetpassword', methods=['GET', 'POST'])
 def resetPassword():
+    if current_user.is_authenticated:
+        return redirect(url_for('main.index'))     
     form = ResetPasswordForm()
     if form.validate_on_submit():
         flash('Your password has been changed successfully. Try signing in with it here.')
