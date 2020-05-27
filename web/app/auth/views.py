@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
+from app.auth.models import User
 
 class LoginForm(FlaskForm):
     email = StringField('E-mail address', validators=[DataRequired(), Email()])
@@ -9,15 +10,20 @@ class LoginForm(FlaskForm):
     rememberMe = BooleanField('Keep me signed in.')
 
 class RegisterForm(FlaskForm):
-    username = StringField('Your name', validators=[DataRequired()])
     email = StringField('E-mail address', validators=[DataRequired(), Email()])
+    username = StringField('Your name', validators=[DataRequired()])    
     password = PasswordField('Password', validators=[DataRequired()])
     password2 = PasswordField('Repeat Password', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Create your account')
 
-    '''
-    Passwords must consist of at least 6 characters.
-    '''
+    def validate_email(self, field):
+        user = User.query.filter_by(email=field.data).first()
+        if user is not None:
+            raise ValidationError('Please use a different email address.')
+
+    def validate_password(self, field):
+        if len(field.data) < 6:
+            raise ValidationError('Passwords must consist of at least 6 characters.')
 
 class ForgotPasswordForm(FlaskForm):
     email = StringField('E-mail address', validators=[DataRequired(), Email()])
