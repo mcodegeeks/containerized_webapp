@@ -52,16 +52,22 @@ def forgotPassword():
         if user is None:
             flash("We're sorry. We weren't able to identify you given the information provided.")
             return redirect(url_for('auth.forgotPassword'))
-        return redirect(url_for('auth.resetPassword'))
+        token = user.getResetPasswordToken()
+        return redirect(url_for('auth.resetPassword', token=token))
     return render_template('forgot_password.html', title='Forgot password', form=form)
 
 
-@bp.route('/resetpassword', methods=['GET', 'POST'])
-def resetPassword():
+@bp.route('/resetpassword/<token>', methods=['GET', 'POST'])
+def resetPassword(token):
     if current_user.is_authenticated:
-        return redirect(url_for('main.index'))     
+        return redirect(url_for('main.index'))
+    user = User.verifyResetPasswordToken(token)
+    if not user:
+        return redirect(url_for('auth.forgotPassword'))
     form = ResetPasswordForm()
     if form.validate_on_submit():
+        user.setPassword(form.password.data)
+        db.session.commit()
         flash('Your password has been changed successfully. Try signing in with it here.')
         return redirect(url_for('auth.login'))
     return render_template('reset_password.html', title='Reset password', form=form)

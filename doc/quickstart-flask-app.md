@@ -74,6 +74,8 @@ if __name__ == "__main__":
 (venv) $ pip install flask-migrate          # SQLAlchemy database migrations for Flask applications using Alembic
 (venv) $ pip install Werkzeug               # The comprehensive WSGI web application library.
 (venv) $ pip install flask-login            # User session management for Flask
+(venv) $ pip install pyjwt                  # JSON Web Token implementation in Python
+(venv) $ pip install cryptography           # Cryptography is a package which provides cryptographic recipes and primitives to Python developers.
 ```
 
 ### Database Migration
