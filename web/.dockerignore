@@ -1,5 +1,6 @@
 .git
 .gitignore
+.env
 .env.db
 .dockerignore
 sftp-config.json
